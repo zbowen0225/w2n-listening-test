@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speech Listening Test</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1c1e21; --mute:#5f6670; --line:#d9dde3; --acc:#2a6df4; --ok:#1a8f4a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:24px 16px 64px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin:16px 0; }
+  h1 { font-size:22px; margin:0 0 8px; } h2 { font-size:18px; margin:0 0 12px; }
+  p { margin:8px 0; } .mute { color:var(--mute); font-size:14px; }
+  label.field { display:block; margin:10px 0 4px; font-weight:600; }
+  input[type=text], select { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px; font-size:16px; }
+  button { background:var(--acc); color:#fff; border:0; border-radius:8px; padding:10px 18px; font-size:16px; cursor:pointer; }
+  button:disabled { background:#b9c3d6; cursor:not-allowed; }
+  button.ghost { background:#eef1f5; color:var(--ink); }
+  audio { width:100%; margin:6px 0 10px; }
+  .scale { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin:6px 0 14px; }
+  .scale label { border:1px solid var(--line); border-radius:8px; padding:10px 4px; text-align:center; cursor:pointer; font-size:14px; background:#fafbfc; }
+  .scale label span { display:block; font-size:20px; font-weight:700; }
+  .scale input { display:none; }
+  .scale input:checked + label { border-color:var(--acc); background:#e8f0ff; }
+  .q { font-weight:600; margin-top:12px; }
+  .bar { height:8px; background:#e3e7ed; border-radius:4px; overflow:hidden; margin:4px 0 12px; }
+  .bar div { height:100%; background:var(--acc); width:0; transition:width .2s; }
+  .row { display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .tag { font-size:13px; color:var(--mute); }
+  .warn { color:#b3261e; font-size:14px; }
+  .ok { color:var(--ok); }
+  ul { padding-left:20px; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script src="settings.js"></script>
+<script>
+"use strict";
+const LT = Object.assign({ submit_url: "", contact: "the experimenter" }, window.LT_SETTINGS || {});
+const $ = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstElementChild; };
+const app = document.getElementById("app");
+let CFG = null, S = null;   // config, listener state
+
+// ---------- seeded PRNG so a resumed session keeps its order ----------
+function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed) { let a = seed || 1; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function shuffle(arr, r) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+// avoid the same speaker twice in a row where possible
+function spread(list) { const a = list.slice(); for (let i = 1; i < a.length; i++) { if (a[i].spk === a[i-1].spk) { for (let j = i + 1; j < a.length; j++) { if (a[j].spk !== a[i-1].spk && (j + 1 >= a.length || a[j].spk !== a[i+1]?.spk)) { [a[i], a[j]] = [a[j], a[i]]; break; } } } } return a; }
+
+const KEY = () => "lt_" + S.listener;
+function save() { try { localStorage.setItem(KEY(), JSON.stringify(S)); } catch (e) {} }
+
+const SCALES = {
+  nat:   ["Bad", "Poor", "Fair", "Good", "Excellent"],
+  intel: ["Very hard", "Hard", "Moderate", "Easy", "Very easy"],
+  sim:   ["Definitely different", "Probably different", "Not sure", "Probably same", "Definitely same"],
+};
+function scale(name, labels) {
+  return `<div class="scale">` + labels.map((l, i) => `<input type="radio" name="${name}" id="${name}${i+1}" value="${i+1}"><label for="${name}${i+1}"><span>${i+1}</span>${l}</label>`).join("") + `</div>`;
+}
+function picked(name) { const e = document.querySelector(`input[name=${name}]:checked`); return e ? +e.value : null; }
+
+// ---------- screens ----------
+function intro() {
+  const url = new URL(location.href);
+  const el = $(`<div>
+    <div class="card"><h1>Speech Listening Test</h1>
+      <p>You will listen to short English sentences and rate them. The test has two parts and takes about <b>30 minutes</b>.</p>
+      <ul>
+        <li>Use <b>headphones</b> in a quiet room. Set a comfortable volume on the next screen and keep it fixed.</li>
+        <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like.</li>
+        <li>There are no right or wrong answers. Rate what you hear.</li>
+        <li>Your progress is saved in this browser. If you close the page, reopen it and enter the same name to continue.</li>
+      </ul>
+      <label class="field">Your name or participant code</label><input type="text" id="who" placeholder="e.g. P07">
+      <label class="field">Native language</label><input type="text" id="lang" placeholder="e.g. English, Mandarin">
+      <label class="field">How familiar are you with Singapore English?</label>
+      <select id="sge"><option value="">choose</option><option>Native / daily use</option><option>Familiar</option><option>Some exposure</option><option>Not familiar</option></select>
+      <label class="field">Listening device</label>
+      <select id="dev"><option value="">choose</option><option>Over-ear headphones</option><option>In-ear earphones</option><option>Loudspeaker (not recommended)</option></select>
+      <p class="mute">Age and hearing: <input type="text" id="age" style="width:5em" placeholder="age"> &nbsp; <label><input type="checkbox" id="hear"> I have no known hearing impairment</label></p>
+      <p class="warn" id="err"></p>
+      <div class="row"><span></span><button id="go">Start</button></div>
+    </div></div>`);
+  el.querySelector("#go").onclick = () => {
+    const who = el.querySelector("#who").value.trim();
+    const info = { lang: el.querySelector("#lang").value.trim(), sg_english: el.querySelector("#sge").value, device: el.querySelector("#dev").value, age: el.querySelector("#age").value, no_impairment: el.querySelector("#hear").checked };
+    if (!who || !info.sg_english || !info.device) { el.querySelector("#err").textContent = "Please fill in your code, familiarity and device."; return; }
+    let saved = null; try { saved = JSON.parse(localStorage.getItem("lt_" + who)); } catch (e) {}
+    if (saved && !saved.done) { S = saved; render(); return; }
+    const g = url.searchParams.get("g") || CFG.groups[Math.floor(Math.random() * CFG.groups.length)];
+    const r = rng(hash(who + g));
+    const mine = CFG.trials.filter(t => t.group === g);
+    S = { listener: who, group: g, info, started: new Date().toISOString(), ua: navigator.userAgent,
+          p1: spread(shuffle(mine, r)).map(t => t.id), p2: spread(shuffle(mine.filter(t => t.in_sim), r)).map(t => t.id),
+          stage: "calib", i1: 0, i2: 0, ratings: [], done: false };
+    save(); render();
+  };
+  return el;
+}
+
+function calib() {
+  const t = CFG.trials.find(x => x.group === S.group);  // any reference clip = natural speech
+  const el = $(`<div><div class="card"><h2>Volume</h2>
+    <p>Play this natural recording and set your volume to a comfortable level. Do not change it afterwards.</p>
+    <audio controls src="${t.ref}"></audio>
+    <h2>What you will rate</h2>
+    <p><b>Part 1</b> — one clip at a time. Two questions: how <b>natural</b> does the voice sound (like a real person speaking normally, not whispered, robotic or distorted), and how <b>easy to understand</b> are the words.</p>
+    <p><b>Part 2</b> — a reference recording of a person, then a test clip of a <i>different sentence</i>. One question: is the test clip the <b>same person</b> as the reference? Judge the voice, not the words, the recording quality or the pitch melody.</p>
+    <p class="mute">Some clips are whispered or sound synthetic on purpose; use the whole scale.</p>
+    <div class="row"><span></span><button id="go">Begin Part 1</button></div></div></div>`);
+  el.querySelector("#go").onclick = () => { S.stage = "p1"; save(); render(); };
+  return el;
+}
+
+function trial1() {
+  const n = S.p1.length, i = S.i1;
+  if (i >= n) { S.stage = "p2intro"; save(); return render(); }
+  const t = CFG.trials.find(x => x.id === S.p1[i]);
+  const el = $(`<div><div class="card">
+    <div class="row"><b>Part 1 of 2</b><span class="tag">clip ${i+1} / ${n}</span></div><div class="bar"><div style="width:${100*i/n}%"></div></div>
+    <audio controls id="a" src="${t.file}"></audio>
+    <div class="q">How natural does this voice sound?</div>${scale("nat", SCALES.nat)}
+    <div class="q">How easy is it to understand the words?</div>${scale("intel", SCALES.intel)}
+    <div class="row"><span class="mute" id="hint">Play the clip in full before rating.</span><button id="next" disabled>Next</button></div>
+    </div></div>`);
+  let plays = 0; const a = el.querySelector("#a"), nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  const check = () => { nb.disabled = !(plays > 0 && picked("nat") && picked("intel")); hint.textContent = plays > 0 ? "" : "Play the clip in full before rating."; };
+  a.onended = () => { plays++; check(); };
+  el.querySelectorAll("input[type=radio]").forEach(r => r.onchange = check);
+  nb.onclick = () => { S.ratings.push({ part: 1, id: t.id, order: i, nat: picked("nat"), intel: picked("intel"), plays, ts: new Date().toISOString() }); S.i1++; save(); render(); };
+  preload(S.p1[i + 1]);
+  return el;
+}
+
+function p2intro() {
+  const el = $(`<div><div class="card"><h2>Part 2 — same person?</h2>
+    <p>Each screen has a <b>reference</b> recording of a person and a <b>test</b> clip of a different sentence. Decide whether the test clip is the <b>same person</b> as the reference.</p>
+    <p>Focus on the voice identity (timbre, vocal quality, how high or low the voice is). Ignore the sentence content, background noise and small artefacts.</p>
+    <div class="row"><span></span><button id="go">Begin Part 2</button></div></div></div>`);
+  el.querySelector("#go").onclick = () => { S.stage = "p2"; save(); render(); };
+  return el;
+}
+
+function trial2() {
+  const n = S.p2.length, i = S.i2;
+  if (i >= n) { S.stage = "submit"; save(); return render(); }
+  const t = CFG.trials.find(x => x.id === S.p2[i]);
+  const el = $(`<div><div class="card">
+    <div class="row"><b>Part 2 of 2</b><span class="tag">pair ${i+1} / ${n}</span></div><div class="bar"><div style="width:${100*i/n}%"></div></div>
+    <div class="q">Reference</div><audio controls id="r" src="${t.ref}"></audio>
+    <div class="q">Test</div><audio controls id="a" src="${t.file}"></audio>
+    <div class="q">Is the test clip the same person as the reference?</div>${scale("sim", SCALES.sim)}
+    <div class="row"><span class="mute" id="hint">Play both clips in full before rating.</span><button id="next" disabled>Next</button></div>
+    </div></div>`);
+  let pr = 0, pa = 0; const nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  const check = () => { nb.disabled = !(pr > 0 && pa > 0 && picked("sim")); hint.textContent = (pr > 0 && pa > 0) ? "" : "Play both clips in full before rating."; };
+  el.querySelector("#r").onended = () => { pr++; check(); };
+  el.querySelector("#a").onended = () => { pa++; check(); };
+  el.querySelectorAll("input[type=radio]").forEach(r => r.onchange = check);
+  nb.onclick = () => { S.ratings.push({ part: 2, id: t.id, order: i, sim: picked("sim"), plays_ref: pr, plays: pa, ts: new Date().toISOString() }); S.i2++; save(); render(); };
+  preload(S.p2[i + 1]);
+  return el;
+}
+
+function submit() {
+  const el = $(`<div><div class="card"><h2>Finished — thank you!</h2><p id="msg">Sending your answers…</p>
+    <p class="mute" id="bk"></p>
+    <div class="row"><span></span><button id="dl" class="ghost">Download my answers (backup)</button></div></div></div>`);
+  S.finished = new Date().toISOString();
+  const payload = JSON.stringify(S);
+  el.querySelector("#dl").onclick = () => { const b = new Blob([payload], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `listening_${S.listener}.json`; a.click(); };
+  const ok = () => { el.querySelector("#msg").innerHTML = `<span class="ok">Your answers were saved. You can close this page.</span>`; el.querySelector("#bk").textContent = `If ${LT.contact} asks for a backup copy, use the button below.`; S.done = true; save(); };
+  const fail = () => { el.querySelector("#msg").innerHTML = `<span class="warn">Could not reach the server. Please download your answers below and send the file to ${LT.contact}.</span>`; S.done = true; save(); };
+  const send = LT.submit_url
+    ? fetch(LT.submit_url, { method: "POST", headers: { "Content-Type": "text/plain" }, body: payload }).then(r => r.json()).then(j => { if (!j.ok) throw 0; })
+        .catch(() => fetch(LT.submit_url, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: payload }))
+    : fetch("submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload }).then(r => { if (!r.ok) throw 0; });
+  send.then(ok).catch(fail);
+  return el;
+}
+
+function preload(id) { if (!id) return; const t = CFG.trials.find(x => x.id === id); if (t) { const a = new Audio(); a.preload = "auto"; a.src = t.file; } }
+
+function render() {
+  app.innerHTML = "";
+  const map = { calib, p1: trial1, p2intro, p2: trial2, submit };
+  app.appendChild(S ? map[S.stage]() : intro());
+  window.scrollTo(0, 0);
+}
+
+fetch("config.json").then(r => r.json()).then(c => { CFG = c; render(); })
+  .catch(() => { app.appendChild($(`<div class="card warn">config.json not found. Run select_stimuli.py first and serve this folder with serve.py.</div>`)); });
+</script>
+</body>
+</html>
