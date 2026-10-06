@@ -47,8 +47,11 @@ def main():
         sys.exit("no results/*.json")
     # keep the latest file per listener
     latest = {}
-    for f in files:
+    for f in files:  # chronological by filename; a complete submission beats a later partial one
         d = json.load(open(f))
+        prev = latest.get(d["listener"])
+        if prev and prev.get("done", not prev.get("partial")) and d.get("partial"):
+            continue
         latest[d["listener"]] = d
     rows = []  # (listener, group, system, spk, uid, metric, value)
     for who, d in latest.items():

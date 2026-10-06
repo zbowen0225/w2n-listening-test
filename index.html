@@ -51,7 +51,12 @@ function shuffle(arr, r) { const a = arr.slice(); for (let i = a.length - 1; i >
 function spread(list) { const a = list.slice(); for (let i = 1; i < a.length; i++) { if (a[i].spk === a[i-1].spk) { for (let j = i + 1; j < a.length; j++) { if (a[j].spk !== a[i-1].spk && (j + 1 >= a.length || a[j].spk !== a[i+1]?.spk)) { [a[i], a[j]] = [a[j], a[i]]; break; } } } } return a; }
 
 const KEY = () => "lt_" + S.listener;
-function save() { try { localStorage.setItem(KEY(), JSON.stringify(S)); } catch (e) {} }
+function save() { try { localStorage.setItem(KEY(), JSON.stringify(S)); } catch (e) {}
+  // partial upload every 12 ratings so an abandoned session still reaches the experimenter
+  if (LT.submit_url && !S.done && S.ratings.length > 0 && S.ratings.length % 12 === 0 && S.ratings.length !== S.lastSync) {
+    S.lastSync = S.ratings.length;
+    fetch(LT.submit_url, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(Object.assign({ partial: true }, S)) }).catch(() => {});
+  } }
 
 const SCALES = {
   nat:   ["Bad", "Poor", "Fair", "Good", "Excellent"],
@@ -73,7 +78,7 @@ function intro() {
         <li>Use <b>headphones</b> in a quiet room. Set a comfortable volume on the next screen and keep it fixed.</li>
         <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like.</li>
         <li>There are no right or wrong answers. Rate what you hear.</li>
-        <li>Your progress is saved in this browser. If you close the page, reopen it and enter the same name to continue.</li>
+        <li>Your progress is saved in this browser. You can pause at any time: close the page, reopen the same link later <b>in the same browser</b> and enter the same code to continue where you stopped.</li>
       </ul>
       <label class="field">Your name or participant code</label><input type="text" id="who" placeholder="e.g. P07">
       <label class="field">Native language</label><input type="text" id="lang" placeholder="e.g. English, Mandarin">
