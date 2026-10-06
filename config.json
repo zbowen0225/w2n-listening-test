@@ -133,7 +133,7 @@
    "id": "t0008",
    "file": "stimuli/t0008.wav",
    "spk": "s107",
-   "group": "B",
+   "group": "A",
    "ref": "stimuli/t0001.wav",
    "in_sim": true
   },
@@ -141,9 +141,9 @@
    "id": "t0009",
    "file": "stimuli/t0009.wav",
    "spk": "s107",
-   "group": "B",
+   "group": "A",
    "ref": "stimuli/t0001.wav",
-   "in_sim": false
+   "in_sim": true
   },
   {
    "id": "t0010",
@@ -159,7 +159,7 @@
    "spk": "s107",
    "group": "B",
    "ref": "stimuli/t0001.wav",
-   "in_sim": true
+   "in_sim": false
   },
   {
    "id": "t0012",
@@ -170,1203 +170,1451 @@
    "in_sim": true
   },
   {
+   "id": "t0013",
+   "file": "stimuli/t0013.wav",
+   "spk": "s107",
+   "group": "B",
+   "ref": "stimuli/t0001.wav",
+   "in_sim": true
+  },
+  {
    "id": "t0014",
    "file": "stimuli/t0014.wav",
-   "spk": "s124",
-   "group": "A",
-   "ref": "stimuli/t0013.wav",
+   "spk": "s107",
+   "group": "B",
+   "ref": "stimuli/t0001.wav",
    "in_sim": true
   },
   {
    "id": "t0015",
    "file": "stimuli/t0015.wav",
-   "spk": "s124",
-   "group": "A",
-   "ref": "stimuli/t0013.wav",
-   "in_sim": false
+   "spk": "s107",
+   "group": "B",
+   "ref": "stimuli/t0001.wav",
+   "in_sim": true
   },
   {
    "id": "t0016",
    "file": "stimuli/t0016.wav",
-   "spk": "s124",
-   "group": "A",
-   "ref": "stimuli/t0013.wav",
+   "spk": "s107",
+   "group": "B",
+   "ref": "stimuli/t0001.wav",
    "in_sim": true
   },
   {
    "id": "t0017",
    "file": "stimuli/t0017.wav",
-   "spk": "s124",
-   "group": "A",
-   "ref": "stimuli/t0013.wav",
-   "in_sim": true
-  },
-  {
-   "id": "t0018",
-   "file": "stimuli/t0018.wav",
-   "spk": "s124",
-   "group": "A",
-   "ref": "stimuli/t0013.wav",
+   "spk": "s107",
+   "group": "B",
+   "ref": "stimuli/t0001.wav",
    "in_sim": true
   },
   {
    "id": "t0019",
    "file": "stimuli/t0019.wav",
    "spk": "s124",
-   "group": "B",
-   "ref": "stimuli/t0013.wav",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0020",
    "file": "stimuli/t0020.wav",
    "spk": "s124",
-   "group": "B",
-   "ref": "stimuli/t0013.wav",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
    "in_sim": false
   },
   {
    "id": "t0021",
    "file": "stimuli/t0021.wav",
    "spk": "s124",
-   "group": "B",
-   "ref": "stimuli/t0013.wav",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0022",
    "file": "stimuli/t0022.wav",
    "spk": "s124",
-   "group": "B",
-   "ref": "stimuli/t0013.wav",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0023",
    "file": "stimuli/t0023.wav",
    "spk": "s124",
-   "group": "B",
-   "ref": "stimuli/t0013.wav",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0024",
+   "file": "stimuli/t0024.wav",
+   "spk": "s124",
+   "group": "A",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0025",
    "file": "stimuli/t0025.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "A",
-   "ref": "stimuli/t0024.wav",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0026",
    "file": "stimuli/t0026.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "A",
-   "ref": "stimuli/t0024.wav",
-   "in_sim": false
+   "ref": "stimuli/t0018.wav",
+   "in_sim": true
   },
   {
    "id": "t0027",
    "file": "stimuli/t0027.wav",
-   "spk": "s012",
-   "group": "A",
-   "ref": "stimuli/t0024.wav",
+   "spk": "s124",
+   "group": "B",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0028",
    "file": "stimuli/t0028.wav",
-   "spk": "s012",
-   "group": "A",
-   "ref": "stimuli/t0024.wav",
-   "in_sim": true
+   "spk": "s124",
+   "group": "B",
+   "ref": "stimuli/t0018.wav",
+   "in_sim": false
   },
   {
    "id": "t0029",
    "file": "stimuli/t0029.wav",
-   "spk": "s012",
-   "group": "A",
-   "ref": "stimuli/t0024.wav",
+   "spk": "s124",
+   "group": "B",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0030",
    "file": "stimuli/t0030.wav",
-   "spk": "s012",
-   "group": "A",
-   "ref": "stimuli/t0024.wav",
+   "spk": "s124",
+   "group": "B",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0031",
    "file": "stimuli/t0031.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "B",
-   "ref": "stimuli/t0024.wav",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0032",
    "file": "stimuli/t0032.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "B",
-   "ref": "stimuli/t0024.wav",
-   "in_sim": false
+   "ref": "stimuli/t0018.wav",
+   "in_sim": true
   },
   {
    "id": "t0033",
    "file": "stimuli/t0033.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "B",
-   "ref": "stimuli/t0024.wav",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0034",
    "file": "stimuli/t0034.wav",
-   "spk": "s012",
+   "spk": "s124",
    "group": "B",
-   "ref": "stimuli/t0024.wav",
-   "in_sim": true
-  },
-  {
-   "id": "t0035",
-   "file": "stimuli/t0035.wav",
-   "spk": "s012",
-   "group": "B",
-   "ref": "stimuli/t0024.wav",
+   "ref": "stimuli/t0018.wav",
    "in_sim": true
   },
   {
    "id": "t0036",
    "file": "stimuli/t0036.wav",
    "spk": "s012",
-   "group": "B",
-   "ref": "stimuli/t0024.wav",
+   "group": "A",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
+  },
+  {
+   "id": "t0037",
+   "file": "stimuli/t0037.wav",
+   "spk": "s012",
+   "group": "A",
+   "ref": "stimuli/t0035.wav",
+   "in_sim": false
   },
   {
    "id": "t0038",
    "file": "stimuli/t0038.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0039",
    "file": "stimuli/t0039.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
-   "in_sim": false
+   "ref": "stimuli/t0035.wav",
+   "in_sim": true
   },
   {
    "id": "t0040",
    "file": "stimuli/t0040.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0041",
    "file": "stimuli/t0041.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0042",
    "file": "stimuli/t0042.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0043",
    "file": "stimuli/t0043.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "A",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0044",
    "file": "stimuli/t0044.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0045",
    "file": "stimuli/t0045.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": false
   },
   {
    "id": "t0046",
    "file": "stimuli/t0046.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0047",
    "file": "stimuli/t0047.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0048",
    "file": "stimuli/t0048.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0049",
    "file": "stimuli/t0049.wav",
-   "spk": "s011",
+   "spk": "s012",
    "group": "B",
-   "ref": "stimuli/t0037.wav",
+   "ref": "stimuli/t0035.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0050",
+   "file": "stimuli/t0050.wav",
+   "spk": "s012",
+   "group": "B",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
   },
   {
    "id": "t0051",
    "file": "stimuli/t0051.wav",
-   "spk": "s010",
-   "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "spk": "s012",
+   "group": "B",
+   "ref": "stimuli/t0035.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0052",
-   "file": "stimuli/t0052.wav",
-   "spk": "s010",
-   "group": "A",
-   "ref": "stimuli/t0050.wav",
-   "in_sim": false
   },
   {
    "id": "t0053",
    "file": "stimuli/t0053.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0054",
    "file": "stimuli/t0054.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
-   "in_sim": true
+   "ref": "stimuli/t0052.wav",
+   "in_sim": false
   },
   {
    "id": "t0055",
    "file": "stimuli/t0055.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0056",
    "file": "stimuli/t0056.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0057",
    "file": "stimuli/t0057.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0058",
    "file": "stimuli/t0058.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "A",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0059",
    "file": "stimuli/t0059.wav",
-   "spk": "s010",
-   "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "spk": "s011",
+   "group": "A",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0060",
    "file": "stimuli/t0060.wav",
-   "spk": "s010",
-   "group": "B",
-   "ref": "stimuli/t0050.wav",
-   "in_sim": false
+   "spk": "s011",
+   "group": "A",
+   "ref": "stimuli/t0052.wav",
+   "in_sim": true
   },
   {
    "id": "t0061",
    "file": "stimuli/t0061.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0062",
    "file": "stimuli/t0062.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
-   "in_sim": true
+   "ref": "stimuli/t0052.wav",
+   "in_sim": false
   },
   {
    "id": "t0063",
    "file": "stimuli/t0063.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0064",
    "file": "stimuli/t0064.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0065",
    "file": "stimuli/t0065.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0066",
    "file": "stimuli/t0066.wav",
-   "spk": "s010",
+   "spk": "s011",
    "group": "B",
-   "ref": "stimuli/t0050.wav",
+   "ref": "stimuli/t0052.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0067",
+   "file": "stimuli/t0067.wav",
+   "spk": "s011",
+   "group": "B",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
   },
   {
    "id": "t0068",
    "file": "stimuli/t0068.wav",
-   "spk": "s104",
-   "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "spk": "s011",
+   "group": "B",
+   "ref": "stimuli/t0052.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0069",
-   "file": "stimuli/t0069.wav",
-   "spk": "s104",
-   "group": "A",
-   "ref": "stimuli/t0067.wav",
-   "in_sim": false
   },
   {
    "id": "t0070",
    "file": "stimuli/t0070.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0071",
    "file": "stimuli/t0071.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
-   "in_sim": true
+   "ref": "stimuli/t0069.wav",
+   "in_sim": false
   },
   {
    "id": "t0072",
    "file": "stimuli/t0072.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0073",
    "file": "stimuli/t0073.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0074",
    "file": "stimuli/t0074.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0075",
    "file": "stimuli/t0075.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "A",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0076",
    "file": "stimuli/t0076.wav",
-   "spk": "s104",
-   "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "spk": "s010",
+   "group": "A",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0077",
    "file": "stimuli/t0077.wav",
-   "spk": "s104",
-   "group": "B",
-   "ref": "stimuli/t0067.wav",
-   "in_sim": false
+   "spk": "s010",
+   "group": "A",
+   "ref": "stimuli/t0069.wav",
+   "in_sim": true
   },
   {
    "id": "t0078",
    "file": "stimuli/t0078.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0079",
    "file": "stimuli/t0079.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
-   "in_sim": true
+   "ref": "stimuli/t0069.wav",
+   "in_sim": false
   },
   {
    "id": "t0080",
    "file": "stimuli/t0080.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0081",
    "file": "stimuli/t0081.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0082",
    "file": "stimuli/t0082.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0083",
    "file": "stimuli/t0083.wav",
-   "spk": "s104",
+   "spk": "s010",
    "group": "B",
-   "ref": "stimuli/t0067.wav",
+   "ref": "stimuli/t0069.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0084",
+   "file": "stimuli/t0084.wav",
+   "spk": "s010",
+   "group": "B",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
   },
   {
    "id": "t0085",
    "file": "stimuli/t0085.wav",
-   "spk": "s116",
-   "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "spk": "s010",
+   "group": "B",
+   "ref": "stimuli/t0069.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0086",
-   "file": "stimuli/t0086.wav",
-   "spk": "s116",
-   "group": "A",
-   "ref": "stimuli/t0084.wav",
-   "in_sim": false
   },
   {
    "id": "t0087",
    "file": "stimuli/t0087.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0088",
    "file": "stimuli/t0088.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
-   "in_sim": true
+   "ref": "stimuli/t0086.wav",
+   "in_sim": false
   },
   {
    "id": "t0089",
    "file": "stimuli/t0089.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0090",
    "file": "stimuli/t0090.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0091",
    "file": "stimuli/t0091.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0092",
    "file": "stimuli/t0092.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "A",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0093",
    "file": "stimuli/t0093.wav",
-   "spk": "s116",
-   "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "spk": "s104",
+   "group": "A",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0094",
    "file": "stimuli/t0094.wav",
-   "spk": "s116",
-   "group": "B",
-   "ref": "stimuli/t0084.wav",
-   "in_sim": false
+   "spk": "s104",
+   "group": "A",
+   "ref": "stimuli/t0086.wav",
+   "in_sim": true
   },
   {
    "id": "t0095",
    "file": "stimuli/t0095.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0096",
    "file": "stimuli/t0096.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
-   "in_sim": true
+   "ref": "stimuli/t0086.wav",
+   "in_sim": false
   },
   {
    "id": "t0097",
    "file": "stimuli/t0097.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0098",
    "file": "stimuli/t0098.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0099",
    "file": "stimuli/t0099.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0100",
    "file": "stimuli/t0100.wav",
-   "spk": "s116",
+   "spk": "s104",
    "group": "B",
-   "ref": "stimuli/t0084.wav",
+   "ref": "stimuli/t0086.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0101",
+   "file": "stimuli/t0101.wav",
+   "spk": "s104",
+   "group": "B",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
   },
   {
    "id": "t0102",
    "file": "stimuli/t0102.wav",
-   "spk": "s019",
-   "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "spk": "s104",
+   "group": "B",
+   "ref": "stimuli/t0086.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0103",
-   "file": "stimuli/t0103.wav",
-   "spk": "s019",
-   "group": "A",
-   "ref": "stimuli/t0101.wav",
-   "in_sim": false
   },
   {
    "id": "t0104",
    "file": "stimuli/t0104.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0105",
    "file": "stimuli/t0105.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
-   "in_sim": true
+   "ref": "stimuli/t0103.wav",
+   "in_sim": false
   },
   {
    "id": "t0106",
    "file": "stimuli/t0106.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0107",
    "file": "stimuli/t0107.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0108",
    "file": "stimuli/t0108.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0109",
    "file": "stimuli/t0109.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "A",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0110",
    "file": "stimuli/t0110.wav",
-   "spk": "s019",
-   "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "spk": "s116",
+   "group": "A",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0111",
    "file": "stimuli/t0111.wav",
-   "spk": "s019",
-   "group": "B",
-   "ref": "stimuli/t0101.wav",
-   "in_sim": false
+   "spk": "s116",
+   "group": "A",
+   "ref": "stimuli/t0103.wav",
+   "in_sim": true
   },
   {
    "id": "t0112",
    "file": "stimuli/t0112.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0113",
    "file": "stimuli/t0113.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
-   "in_sim": true
+   "ref": "stimuli/t0103.wav",
+   "in_sim": false
   },
   {
    "id": "t0114",
    "file": "stimuli/t0114.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0115",
    "file": "stimuli/t0115.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0116",
    "file": "stimuli/t0116.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0117",
    "file": "stimuli/t0117.wav",
-   "spk": "s019",
+   "spk": "s116",
    "group": "B",
-   "ref": "stimuli/t0101.wav",
+   "ref": "stimuli/t0103.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0118",
+   "file": "stimuli/t0118.wav",
+   "spk": "s116",
+   "group": "B",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
   },
   {
    "id": "t0119",
    "file": "stimuli/t0119.wav",
-   "spk": "s105",
-   "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "spk": "s116",
+   "group": "B",
+   "ref": "stimuli/t0103.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0120",
-   "file": "stimuli/t0120.wav",
-   "spk": "s105",
-   "group": "A",
-   "ref": "stimuli/t0118.wav",
-   "in_sim": false
   },
   {
    "id": "t0121",
    "file": "stimuli/t0121.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0122",
    "file": "stimuli/t0122.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
-   "in_sim": true
+   "ref": "stimuli/t0120.wav",
+   "in_sim": false
   },
   {
    "id": "t0123",
    "file": "stimuli/t0123.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0124",
    "file": "stimuli/t0124.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0125",
    "file": "stimuli/t0125.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0126",
    "file": "stimuli/t0126.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "A",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0127",
    "file": "stimuli/t0127.wav",
-   "spk": "s105",
-   "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "spk": "s019",
+   "group": "A",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0128",
    "file": "stimuli/t0128.wav",
-   "spk": "s105",
-   "group": "B",
-   "ref": "stimuli/t0118.wav",
-   "in_sim": false
+   "spk": "s019",
+   "group": "A",
+   "ref": "stimuli/t0120.wav",
+   "in_sim": true
   },
   {
    "id": "t0129",
    "file": "stimuli/t0129.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0130",
    "file": "stimuli/t0130.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
-   "in_sim": true
+   "ref": "stimuli/t0120.wav",
+   "in_sim": false
   },
   {
    "id": "t0131",
    "file": "stimuli/t0131.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0132",
    "file": "stimuli/t0132.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0133",
    "file": "stimuli/t0133.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0134",
    "file": "stimuli/t0134.wav",
-   "spk": "s105",
+   "spk": "s019",
    "group": "B",
-   "ref": "stimuli/t0118.wav",
+   "ref": "stimuli/t0120.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0135",
+   "file": "stimuli/t0135.wav",
+   "spk": "s019",
+   "group": "B",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
   },
   {
    "id": "t0136",
    "file": "stimuli/t0136.wav",
-   "spk": "s108",
-   "group": "A",
-   "ref": "stimuli/t0135.wav",
+   "spk": "s019",
+   "group": "B",
+   "ref": "stimuli/t0120.wav",
    "in_sim": true
-  },
-  {
-   "id": "t0137",
-   "file": "stimuli/t0137.wav",
-   "spk": "s108",
-   "group": "A",
-   "ref": "stimuli/t0135.wav",
-   "in_sim": false
   },
   {
    "id": "t0138",
    "file": "stimuli/t0138.wav",
-   "spk": "s108",
+   "spk": "s105",
    "group": "A",
-   "ref": "stimuli/t0135.wav",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0139",
    "file": "stimuli/t0139.wav",
-   "spk": "s108",
+   "spk": "s105",
    "group": "A",
-   "ref": "stimuli/t0135.wav",
-   "in_sim": true
+   "ref": "stimuli/t0137.wav",
+   "in_sim": false
   },
   {
    "id": "t0140",
    "file": "stimuli/t0140.wav",
-   "spk": "s108",
+   "spk": "s105",
    "group": "A",
-   "ref": "stimuli/t0135.wav",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0141",
    "file": "stimuli/t0141.wav",
-   "spk": "s108",
-   "group": "B",
-   "ref": "stimuli/t0135.wav",
+   "spk": "s105",
+   "group": "A",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0142",
    "file": "stimuli/t0142.wav",
-   "spk": "s108",
-   "group": "B",
-   "ref": "stimuli/t0135.wav",
-   "in_sim": false
+   "spk": "s105",
+   "group": "A",
+   "ref": "stimuli/t0137.wav",
+   "in_sim": true
   },
   {
    "id": "t0143",
    "file": "stimuli/t0143.wav",
-   "spk": "s108",
-   "group": "B",
-   "ref": "stimuli/t0135.wav",
+   "spk": "s105",
+   "group": "A",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0144",
    "file": "stimuli/t0144.wav",
-   "spk": "s108",
-   "group": "B",
-   "ref": "stimuli/t0135.wav",
+   "spk": "s105",
+   "group": "A",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0145",
    "file": "stimuli/t0145.wav",
-   "spk": "s108",
+   "spk": "s105",
+   "group": "A",
+   "ref": "stimuli/t0137.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0146",
+   "file": "stimuli/t0146.wav",
+   "spk": "s105",
    "group": "B",
-   "ref": "stimuli/t0135.wav",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0147",
    "file": "stimuli/t0147.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
-   "in_sim": true
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
+   "in_sim": false
   },
   {
    "id": "t0148",
    "file": "stimuli/t0148.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
-   "in_sim": false
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
+   "in_sim": true
   },
   {
    "id": "t0149",
    "file": "stimuli/t0149.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0150",
    "file": "stimuli/t0150.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0151",
    "file": "stimuli/t0151.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0152",
    "file": "stimuli/t0152.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0153",
    "file": "stimuli/t0153.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
-   "in_sim": true
-  },
-  {
-   "id": "t0154",
-   "file": "stimuli/t0154.wav",
-   "spk": "s101",
-   "group": "A",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s105",
+   "group": "B",
+   "ref": "stimuli/t0137.wav",
    "in_sim": true
   },
   {
    "id": "t0155",
    "file": "stimuli/t0155.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0156",
    "file": "stimuli/t0156.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": false
   },
   {
    "id": "t0157",
    "file": "stimuli/t0157.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0158",
    "file": "stimuli/t0158.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0159",
    "file": "stimuli/t0159.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0160",
    "file": "stimuli/t0160.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0161",
    "file": "stimuli/t0161.wav",
-   "spk": "s101",
-   "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0162",
    "file": "stimuli/t0162.wav",
-   "spk": "s101",
+   "spk": "s108",
+   "group": "A",
+   "ref": "stimuli/t0154.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0163",
+   "file": "stimuli/t0163.wav",
+   "spk": "s108",
    "group": "B",
-   "ref": "stimuli/t0146.wav",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0164",
    "file": "stimuli/t0164.wav",
-   "spk": "s112",
-   "group": "A",
-   "ref": "stimuli/t0163.wav",
-   "in_sim": true
+   "spk": "s108",
+   "group": "B",
+   "ref": "stimuli/t0154.wav",
+   "in_sim": false
   },
   {
    "id": "t0165",
    "file": "stimuli/t0165.wav",
-   "spk": "s112",
-   "group": "A",
-   "ref": "stimuli/t0163.wav",
-   "in_sim": false
+   "spk": "s108",
+   "group": "B",
+   "ref": "stimuli/t0154.wav",
+   "in_sim": true
   },
   {
    "id": "t0166",
    "file": "stimuli/t0166.wav",
-   "spk": "s112",
-   "group": "A",
-   "ref": "stimuli/t0163.wav",
+   "spk": "s108",
+   "group": "B",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0167",
    "file": "stimuli/t0167.wav",
-   "spk": "s112",
-   "group": "A",
-   "ref": "stimuli/t0163.wav",
+   "spk": "s108",
+   "group": "B",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0168",
    "file": "stimuli/t0168.wav",
-   "spk": "s112",
-   "group": "A",
-   "ref": "stimuli/t0163.wav",
+   "spk": "s108",
+   "group": "B",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0169",
    "file": "stimuli/t0169.wav",
-   "spk": "s112",
+   "spk": "s108",
    "group": "B",
-   "ref": "stimuli/t0163.wav",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0170",
    "file": "stimuli/t0170.wav",
-   "spk": "s112",
+   "spk": "s108",
    "group": "B",
-   "ref": "stimuli/t0163.wav",
-   "in_sim": false
-  },
-  {
-   "id": "t0171",
-   "file": "stimuli/t0171.wav",
-   "spk": "s112",
-   "group": "B",
-   "ref": "stimuli/t0163.wav",
+   "ref": "stimuli/t0154.wav",
    "in_sim": true
   },
   {
    "id": "t0172",
    "file": "stimuli/t0172.wav",
-   "spk": "s112",
-   "group": "B",
-   "ref": "stimuli/t0163.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
    "in_sim": true
   },
   {
    "id": "t0173",
    "file": "stimuli/t0173.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": false
+  },
+  {
+   "id": "t0174",
+   "file": "stimuli/t0174.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0175",
+   "file": "stimuli/t0175.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0176",
+   "file": "stimuli/t0176.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0177",
+   "file": "stimuli/t0177.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0178",
+   "file": "stimuli/t0178.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0179",
+   "file": "stimuli/t0179.wav",
+   "spk": "s101",
+   "group": "A",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0180",
+   "file": "stimuli/t0180.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0181",
+   "file": "stimuli/t0181.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": false
+  },
+  {
+   "id": "t0182",
+   "file": "stimuli/t0182.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0183",
+   "file": "stimuli/t0183.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0184",
+   "file": "stimuli/t0184.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0185",
+   "file": "stimuli/t0185.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0186",
+   "file": "stimuli/t0186.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0187",
+   "file": "stimuli/t0187.wav",
+   "spk": "s101",
+   "group": "B",
+   "ref": "stimuli/t0171.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0189",
+   "file": "stimuli/t0189.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0190",
+   "file": "stimuli/t0190.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": false
+  },
+  {
+   "id": "t0191",
+   "file": "stimuli/t0191.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0192",
+   "file": "stimuli/t0192.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0193",
+   "file": "stimuli/t0193.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0194",
+   "file": "stimuli/t0194.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0195",
+   "file": "stimuli/t0195.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0196",
+   "file": "stimuli/t0196.wav",
+   "spk": "s112",
+   "group": "A",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0197",
+   "file": "stimuli/t0197.wav",
    "spk": "s112",
    "group": "B",
-   "ref": "stimuli/t0163.wav",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0198",
+   "file": "stimuli/t0198.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": false
+  },
+  {
+   "id": "t0199",
+   "file": "stimuli/t0199.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0200",
+   "file": "stimuli/t0200.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0201",
+   "file": "stimuli/t0201.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0202",
+   "file": "stimuli/t0202.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0203",
+   "file": "stimuli/t0203.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
+   "in_sim": true
+  },
+  {
+   "id": "t0204",
+   "file": "stimuli/t0204.wav",
+   "spk": "s112",
+   "group": "B",
+   "ref": "stimuli/t0188.wav",
    "in_sim": true
   }
  ]
