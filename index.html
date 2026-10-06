@@ -78,6 +78,7 @@ function intro() {
         <li>Use <b>headphones</b> in a quiet room. Set a comfortable volume on the next screen and keep it fixed.</li>
         <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like.</li>
         <li>There are no right or wrong answers. Rate what you hear.</li>
+        <li>At the end a small file with your answers is downloaded; please send it to the experimenter.</li>
         <li>Your progress is saved in this browser. You can pause at any time: close the page, reopen the same link later <b>in the same browser</b> and enter the same code to continue where you stopped.</li>
       </ul>
       <label class="field">Your name or participant code</label><input type="text" id="who" placeholder="e.g. P07">
@@ -172,19 +173,22 @@ function trial2() {
 }
 
 function submit() {
-  const el = $(`<div><div class="card"><h2>Finished — thank you!</h2><p id="msg">Sending your answers…</p>
-    <p class="mute" id="bk"></p>
-    <div class="row"><span></span><button id="dl" class="ghost">Download my answers (backup)</button></div></div></div>`);
-  S.finished = new Date().toISOString();
-  const payload = JSON.stringify(S);
-  el.querySelector("#dl").onclick = () => { const b = new Blob([payload], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `listening_${S.listener}.json`; a.click(); };
-  const ok = () => { el.querySelector("#msg").innerHTML = `<span class="ok">Your answers were saved. You can close this page.</span>`; el.querySelector("#bk").textContent = `If ${LT.contact} asks for a backup copy, use the button below.`; S.done = true; save(); };
-  const fail = () => { el.querySelector("#msg").innerHTML = `<span class="warn">Could not reach the server. Please download your answers below and send the file to ${LT.contact}.</span>`; S.done = true; save(); };
-  const send = LT.submit_url
-    ? fetch(LT.submit_url, { method: "POST", headers: { "Content-Type": "text/plain" }, body: payload }).then(r => r.json()).then(j => { if (!j.ok) throw 0; })
-        .catch(() => fetch(LT.submit_url, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: payload }))
-    : fetch("submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload }).then(r => { if (!r.ok) throw 0; });
-  send.then(ok).catch(fail);
+  S.finished = new Date().toISOString(); S.done = true; save();
+  const payload = JSON.stringify(S), fname = `listening_${S.listener}.json`;
+  const download = () => { const b = new Blob([payload], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname; a.click(); };
+  const el = $(`<div><div class="card"><h2>Finished — thank you!</h2>
+    <p id="msg"></p>
+    <div class="row"><span></span><button id="dl">Download my answers</button></div></div></div>`);
+  if (LT.submit_url) {
+    el.querySelector("#msg").textContent = "Sending your answers…";
+    fetch(LT.submit_url, { method: "POST", headers: { "Content-Type": "text/plain" }, body: payload }).then(r => r.json()).then(j => { if (!j.ok) throw 0; })
+      .then(() => { el.querySelector("#msg").innerHTML = `<span class="ok">Your answers were saved. You can close this page.</span>`; })
+      .catch(() => { el.querySelector("#msg").innerHTML = `<span class="warn">Could not reach the server. Please download your answers and send the file to ${LT.contact}.</span>`; download(); });
+  } else {
+    el.querySelector("#msg").innerHTML = `Your answers have been saved as <b>${fname}</b> (check your Downloads folder). <b>Please send this file to ${LT.contact}.</b> If the download did not start, use the button below.`;
+    setTimeout(download, 300);
+  }
+  el.querySelector("#dl").onclick = download;
   return el;
 }
 
