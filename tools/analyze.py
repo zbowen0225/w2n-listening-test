@@ -16,7 +16,7 @@ CFG = json.load(open(next(p for p in (f"{HERE}/web/config.json", f"{HERE}/../con
 items = {k["id"]: k for k in KEY["items"]}
 SPK = CFG["speakers"]
 PAIRS = [("v9", "whispervc"), ("v9", "quickvc"), ("v9", "wesper"), ("v9", "abshz"), ("v9", "nopitch"), ("abshz", "nopitch")]
-METRICS = [("nat", "N-MOS"), ("intel", "I-MOS"), ("sim", "S-MOS")]
+METRICS = [("nat", "Naturalness 自然度 (N-MOS)"), ("intel", "Intelligibility 可懂度 (I-MOS)"), ("sim", "Speaker similarity 相似度 (S-MOS)")]
 
 
 def ci(x):
@@ -62,7 +62,11 @@ def main():
                     rows.append((who, d["group"], k["system"], k["spk"], k["uid"], m, r[m]))
     listeners = sorted(latest)
     out = [f"# Listening test summary", f"listeners: {len(listeners)} ({', '.join(listeners)}); ratings: {len(rows)}",
-           "groups: " + ", ".join(f"{g}={sum(1 for d in latest.values() if d['group']==g)}" for g in CFG["groups"]), ""]
+           "groups: " + ", ".join(f"{g}={sum(1 for d in latest.values() if d['group']==g)}" for g in CFG["groups"]), "",
+           "Legend: all scores are 1–5, 5 = best. N-MOS = naturalness (Part 1, Q1), I-MOS = ease of understanding (Part 1, Q2),",
+           "S-MOS = how similar the voice is to the reference speaker (Part 2). Cell = mean ± 95% CI over stimuli (n stimuli);",
+           "a stimulus's score is first averaged over the listeners who rated it. 'gt' = real normal speech (upper anchor),",
+           "'whisper' = raw whispered input (lower anchor). Δ in the paired table = first system minus second.", ""]
 
     # per-stimulus means
     stim = defaultdict(list)
@@ -120,7 +124,8 @@ def main():
 
     # listener sanity: GT anchors and whisper anchor per listener
     out.append("## Listener sanity (mean rating of anchors)")
-    out.append("| listener | group | gt N-MOS | whisper N-MOS | gt S-MOS | wesper S-MOS | n ratings |")
+    out.append("| listener | group | gt naturalness | whisper naturalness | gt similarity | wesper similarity | n ratings |")
+    out.append("(sanity: gt should be high, whisper low, wesper similarity low — a listener far off these may be guessing)")
     out.append("|---|---|---|---|---|---|---|")
     for who in listeners:
         def mean_of(sysn, m):

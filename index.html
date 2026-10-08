@@ -39,7 +39,7 @@
 </head>
 <body>
 <main id="app"></main>
-<footer>listening test · build 2026-10-08e</footer>
+<footer>listening test · build 2026-10-08f</footer>
 <script src="settings.js"></script>
 <script>
 "use strict";
@@ -64,7 +64,7 @@ function save() { try { localStorage.setItem(KEY(), JSON.stringify(S)); } catch 
   } }
 
 const SCALES = {
-  nat:   ["Bad", "Poor", "Fair", "Good", "Excellent"],
+  nat:   ["Not at all", "Slightly", "Moderately", "Mostly", "Completely"],
   intel: ["Very hard", "Hard", "Moderate", "Easy", "Very easy"],
   sim:   ["Not similar", "Slightly similar", "Somewhat similar", "Similar", "Very similar"],
 };
@@ -116,7 +116,7 @@ function calib() {
     <p>Play this natural recording and set your volume to a comfortable level. Do not change it afterwards.</p>
     <audio controls src="${t.ref}"></audio>
     <h2>What you will rate</h2>
-    <p><b>Part 1</b> — one clip at a time. Two questions: how <b>natural</b> does the voice sound (like a real person speaking normally, not whispered, robotic or distorted), and how <b>easy to understand</b> are the words.</p>
+    <p><b>Part 1</b> — one clip at a time. Two questions: does it sound like <b>natural, normally voiced speech</b> (a real person speaking in a normal voice; whispered, breathy, robotic or distorted speech scores lower, even if it is a genuine recording), and how <b>easy to understand</b> are the words.</p>
     <p><b>Part 2</b> — a reference recording of a person, then a test clip of a <i>different sentence</i>. One question: how <b>similar</b> is the test voice to the reference voice? Judge the voice, not the words, the recording quality or the pitch melody.</p>
     <p class="mute">Some clips are whispered or sound synthetic on purpose; use the whole scale.</p>
     <div class="row"><span></span><button id="go">Begin Part 1</button></div></div></div>`);
@@ -131,7 +131,8 @@ function trial1() {
   const el = $(`<div><div class="card">
     <div class="row"><b>Part 1 of 2</b><span class="tag">clip <b>${i+1}</b> / ${n}</span></div><div class="bar"><div style="width:${100*i/n}%"></div></div>
     <audio controls id="a" src="${t.file}"></audio>
-    <div class="q">How natural does this voice sound?</div>${scale("nat", SCALES.nat)}
+    <div class="q">Does this sound like natural, normally voiced speech?</div>
+    <p class="mute" style="margin:-4px 0 6px">5 = a real person speaking in a normal voice. Lower if it sounds whispered, breathy, robotic, buzzy or distorted, even if it is a real recording.</p>${scale("nat", SCALES.nat)}
     <div class="q">How easy is it to understand the words?</div>${scale("intel", SCALES.intel)}
     <div class="row"><span class="mute" id="hint">Play the clip in full before rating.</span><span><button id="back" class="ghost" ${i === 0 ? "disabled" : ""}>Back</button> <button id="next" disabled>Next</button></span></div>
     </div></div>`);
