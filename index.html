@@ -39,7 +39,7 @@
 </head>
 <body>
 <main id="app"></main>
-<footer>listening test · build 2026-10-08d</footer>
+<footer>listening test · build 2026-10-08e</footer>
 <script src="settings.js"></script>
 <script>
 "use strict";
@@ -76,8 +76,13 @@ function preselect(name, v) { if (v) { const e = document.getElementById(name + 
 function picked(name) { const e = document.querySelector(`input[name=${name}]:checked`); return e ? +e.value : null; }
 
 // ---------- screens ----------
+function newId() { const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let id = ""; const u = new Uint32Array(5); crypto.getRandomValues(u); for (const x of u) id += A[x % A.length]; return id; }
+function unfinished() { try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k.startsWith("lt_")) { const d = JSON.parse(localStorage.getItem(k)); if (d && !d.done && d.ratings) return d; } } } catch (e) {} return null; }
+
 function intro() {
   const url = new URL(location.href);
+  const prev = unfinished();
+  const id = url.searchParams.get("id") || (prev ? prev.listener : newId());
   const el = $(`<div>
     <div class="card"><h1>Speech Listening Test</h1>
       <p>You will listen to short English sentences and rate them. The test has two parts and takes about <b>20 minutes</b>.</p>
@@ -86,21 +91,18 @@ function intro() {
         <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like, and go back to change an earlier answer.</li>
         <li>There are no right or wrong answers. Rate what you hear.</li>
         <li>At the end a small file with your answers is downloaded; please send it to the experimenter.</li>
-        <li>You can pause at any time: close the page, reopen the same link later <b>in the same browser</b> and enter the same number to continue where you stopped.</li>
+        <li>You can pause at any time: close the page and reopen the same link later <b>in the same browser</b> to continue where you stopped.</li>
       </ul>
-      <label class="field">Your participant number</label><input type="text" id="who" placeholder="e.g. 7">
-      <p class="warn" id="err"></p>
-      <div class="row"><span></span><button id="go">Start</button></div>
+      <p>Your participant ID: <b style="font-size:22px;letter-spacing:2px">${id}</b> <span class="mute">(assigned automatically; it is in the name of your answer file)</span></p>
+      ${prev ? `<p class="ok">An unfinished session was found on this browser (${prev.ratings.length} answers). Press Continue to resume it.</p>` : ""}
+      <div class="row"><span></span><button id="go">${prev ? "Continue" : "Start"}</button></div>
     </div></div>`);
   el.querySelector("#go").onclick = () => {
-    const who = el.querySelector("#who").value.trim();
-    if (!who) { el.querySelector("#err").textContent = "Please enter your participant number."; return; }
-    let saved = null; try { saved = JSON.parse(localStorage.getItem("lt_" + who)); } catch (e) {}
-    if (saved && !saved.done) { S = saved; render(); return; }
+    if (prev) { S = prev; render(); return; }
     const g = url.searchParams.get("g") || CFG.groups[Math.floor(Math.random() * CFG.groups.length)];
-    const r = rng(hash(who + g));
+    const r = rng(hash(id + g));
     const mine = CFG.trials.filter(t => t.group === g);
-    S = { listener: who, group: g, started: new Date().toISOString(), ua: navigator.userAgent,
+    S = { listener: id, group: g, started: new Date().toISOString(), ua: navigator.userAgent,
           p1: spread(shuffle(mine, r)).map(t => t.id), p2: spread(shuffle(mine.filter(t => t.in_sim), r)).map(t => t.id),
           stage: "calib", i1: 0, i2: 0, ratings: [], done: false };
     save(); render();
