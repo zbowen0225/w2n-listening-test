@@ -61,10 +61,10 @@ function save() { try { localStorage.setItem(KEY(), JSON.stringify(S)); } catch 
 const SCALES = {
   nat:   ["Bad", "Poor", "Fair", "Good", "Excellent"],
   intel: ["Very hard", "Hard", "Moderate", "Easy", "Very easy"],
-  sim:   ["Definitely different", "Probably different", "Not sure", "Probably same", "Definitely same"],
+  sim:   ["Not similar", "Slightly similar", "Somewhat similar", "Similar", "Very similar"],
 };
-function scale(name, labels) {
-  return `<div class="scale">` + labels.map((l, i) => `<input type="radio" name="${name}" id="${name}${i+1}" value="${i+1}"><label for="${name}${i+1}"><span>${i+1}</span>${l}</label>`).join("") + `</div>`;
+function scale(name, labels) {  // labels[i] = meaning of score i+1; rendered 5 -> 1, best on the left
+  return `<div class="scale">` + [5, 4, 3, 2, 1].map(v => `<input type="radio" name="${name}" id="${name}${v}" value="${v}"><label for="${name}${v}"><span>${v}</span>${labels[v-1]}</label>`).join("") + `</div>`;
 }
 function upsert(r) { const k = S.ratings.findIndex(x => x.part === r.part && x.id === r.id); if (k >= 0) S.ratings[k] = r; else S.ratings.push(r); }
 function preselect(name, v) { if (v) { const e = document.getElementById(name + v); if (e) e.checked = true; } }
@@ -110,7 +110,7 @@ function calib() {
     <audio controls src="${t.ref}"></audio>
     <h2>What you will rate</h2>
     <p><b>Part 1</b> — one clip at a time. Two questions: how <b>natural</b> does the voice sound (like a real person speaking normally, not whispered, robotic or distorted), and how <b>easy to understand</b> are the words.</p>
-    <p><b>Part 2</b> — a reference recording of a person, then a test clip of a <i>different sentence</i>. One question: is the test clip the <b>same person</b> as the reference? Judge the voice, not the words, the recording quality or the pitch melody.</p>
+    <p><b>Part 2</b> — a reference recording of a person, then a test clip of a <i>different sentence</i>. One question: how <b>similar</b> is the test voice to the reference voice? Judge the voice, not the words, the recording quality or the pitch melody.</p>
     <p class="mute">Some clips are whispered or sound synthetic on purpose; use the whole scale.</p>
     <div class="row"><span></span><button id="go">Begin Part 1</button></div></div></div>`);
   el.querySelector("#go").onclick = () => { S.stage = "p1"; save(); render(); };
@@ -142,9 +142,9 @@ function trial1() {
 }
 
 function p2intro() {
-  const el = $(`<div><div class="card"><h2>Part 2 — same person?</h2>
-    <p>Each screen has a <b>reference</b> recording of a person and a <b>test</b> clip of a different sentence. Decide whether the test clip is the <b>same person</b> as the reference.</p>
-    <p>Focus on the voice identity (timbre, vocal quality, how high or low the voice is). Ignore the sentence content, background noise and small artefacts.</p>
+  const el = $(`<div><div class="card"><h2>Part 2 — voice similarity</h2>
+    <p>Each screen has a <b>reference</b> recording of a person and a <b>test</b> clip of a different sentence. Rate how <b>similar</b> the test voice is to the reference voice, from 5 (very similar, could be the same person) to 1 (not similar at all).</p>
+    <p>Focus on the voice identity (timbre, vocal quality, how high or low the voice is). Ignore the sentence content, background noise and small artefacts. You do not need to listen to the whole clip if you are already sure.</p>
     <div class="row"><span></span><button id="go">Begin Part 2</button></div></div></div>`);
   el.querySelector("#go").onclick = () => { S.stage = "p2"; save(); render(); };
   return el;
@@ -158,16 +158,16 @@ function trial2() {
     <div class="row"><b>Part 2 of 2</b><span class="tag">pair ${i+1} / ${n}</span></div><div class="bar"><div style="width:${100*i/n}%"></div></div>
     <div class="q">Reference</div><audio controls id="r" src="${t.ref}"></audio>
     <div class="q">Test</div><audio controls id="a" src="${t.file}"></audio>
-    <div class="q">Is the test clip the same person as the reference?</div>${scale("sim", SCALES.sim)}
-    <div class="row"><span class="mute" id="hint">Play both clips in full before rating.</span><span><button id="back" class="ghost" ${i === 0 ? "disabled" : ""}>Back</button> <button id="next" disabled>Next</button></span></div>
+    <div class="q">How similar is the test voice to the reference voice?</div>${scale("sim", SCALES.sim)}
+    <div class="row"><span class="mute" id="hint"></span><span><button id="back" class="ghost" ${i === 0 ? "disabled" : ""}>Back</button> <button id="next" disabled>Next</button></span></div>
     </div></div>`);
   const prev = S.ratings.find(r => r.part === 2 && r.id === t.id);
   let pr = prev ? prev.plays_ref : 0, pa = prev ? prev.plays : 0; const nb = el.querySelector("#next"), hint = el.querySelector("#hint");
   if (prev) preselect("sim", prev.sim);
   el.querySelector("#back").onclick = () => { S.i2 = Math.max(0, S.i2 - 1); save(); render(); };
-  const check = () => { nb.disabled = !(pr > 0 && pa > 0 && picked("sim")); hint.textContent = (pr > 0 && pa > 0) ? "" : "Play both clips in full before rating."; };
-  el.querySelector("#r").onended = () => { pr++; check(); };
-  el.querySelector("#a").onended = () => { pa++; check(); };
+  const check = () => { nb.disabled = !picked("sim"); };   // no full-play requirement in Part 2
+  el.querySelector("#r").onplay = () => { pr++; };
+  el.querySelector("#a").onplay = () => { pa++; };
   el.querySelectorAll("input[type=radio]").forEach(r => r.onchange = check);
   check();
   nb.onclick = () => { upsert({ part: 2, id: t.id, order: i, sim: picked("sim"), plays_ref: pr, plays: pa, ts: new Date().toISOString() }); S.i2++; save(); render(); };
