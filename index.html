@@ -66,6 +66,8 @@ const SCALES = {
 function scale(name, labels) {
   return `<div class="scale">` + labels.map((l, i) => `<input type="radio" name="${name}" id="${name}${i+1}" value="${i+1}"><label for="${name}${i+1}"><span>${i+1}</span>${l}</label>`).join("") + `</div>`;
 }
+function upsert(r) { const k = S.ratings.findIndex(x => x.part === r.part && x.id === r.id); if (k >= 0) S.ratings[k] = r; else S.ratings.push(r); }
+function preselect(name, v) { if (v) { const e = document.getElementById(name + v); if (e) e.checked = true; } }
 function picked(name) { const e = document.querySelector(`input[name=${name}]:checked`); return e ? +e.value : null; }
 
 // ---------- screens ----------
@@ -76,31 +78,24 @@ function intro() {
       <p>You will listen to short English sentences and rate them. The test has two parts and takes about <b>20 minutes</b>.</p>
       <ul>
         <li>Use <b>headphones</b> in a quiet room. Set a comfortable volume on the next screen and keep it fixed.</li>
-        <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like.</li>
+        <li>Each clip must be played at least once in full before you can rate it. You may replay as often as you like, and go back to change an earlier answer.</li>
         <li>There are no right or wrong answers. Rate what you hear.</li>
         <li>At the end a small file with your answers is downloaded; please send it to the experimenter.</li>
-        <li>Your progress is saved in this browser. You can pause at any time: close the page, reopen the same link later <b>in the same browser</b> and enter the same code to continue where you stopped.</li>
+        <li>You can pause at any time: close the page, reopen the same link later <b>in the same browser</b> and enter the same number to continue where you stopped.</li>
       </ul>
-      <label class="field">Your name or participant code</label><input type="text" id="who" placeholder="e.g. P07">
-      <label class="field">Native language</label><input type="text" id="lang" placeholder="e.g. English, Mandarin">
-      <label class="field">How familiar are you with Singapore English?</label>
-      <select id="sge"><option value="">choose</option><option>Native / daily use</option><option>Familiar</option><option>Some exposure</option><option>Not familiar</option></select>
-      <label class="field">Listening device</label>
-      <select id="dev"><option value="">choose</option><option>Over-ear headphones</option><option>In-ear earphones</option><option>Loudspeaker (not recommended)</option></select>
-      <p class="mute">Age and hearing: <input type="text" id="age" style="width:5em" placeholder="age"> &nbsp; <label><input type="checkbox" id="hear"> I have no known hearing impairment</label></p>
+      <label class="field">Your participant number</label><input type="text" id="who" placeholder="e.g. 7">
       <p class="warn" id="err"></p>
       <div class="row"><span></span><button id="go">Start</button></div>
     </div></div>`);
   el.querySelector("#go").onclick = () => {
     const who = el.querySelector("#who").value.trim();
-    const info = { lang: el.querySelector("#lang").value.trim(), sg_english: el.querySelector("#sge").value, device: el.querySelector("#dev").value, age: el.querySelector("#age").value, no_impairment: el.querySelector("#hear").checked };
-    if (!who || !info.sg_english || !info.device) { el.querySelector("#err").textContent = "Please fill in your code, familiarity and device."; return; }
+    if (!who) { el.querySelector("#err").textContent = "Please enter your participant number."; return; }
     let saved = null; try { saved = JSON.parse(localStorage.getItem("lt_" + who)); } catch (e) {}
     if (saved && !saved.done) { S = saved; render(); return; }
     const g = url.searchParams.get("g") || CFG.groups[Math.floor(Math.random() * CFG.groups.length)];
     const r = rng(hash(who + g));
     const mine = CFG.trials.filter(t => t.group === g);
-    S = { listener: who, group: g, info, started: new Date().toISOString(), ua: navigator.userAgent,
+    S = { listener: who, group: g, started: new Date().toISOString(), ua: navigator.userAgent,
           p1: spread(shuffle(mine, r)).map(t => t.id), p2: spread(shuffle(mine.filter(t => t.in_sim), r)).map(t => t.id),
           stage: "calib", i1: 0, i2: 0, ratings: [], done: false };
     save(); render();
@@ -131,13 +126,17 @@ function trial1() {
     <audio controls id="a" src="${t.file}"></audio>
     <div class="q">How natural does this voice sound?</div>${scale("nat", SCALES.nat)}
     <div class="q">How easy is it to understand the words?</div>${scale("intel", SCALES.intel)}
-    <div class="row"><span class="mute" id="hint">Play the clip in full before rating.</span><button id="next" disabled>Next</button></div>
+    <div class="row"><span class="mute" id="hint">Play the clip in full before rating.</span><span><button id="back" class="ghost" ${i === 0 ? "disabled" : ""}>Back</button> <button id="next" disabled>Next</button></span></div>
     </div></div>`);
-  let plays = 0; const a = el.querySelector("#a"), nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  const prev = S.ratings.find(r => r.part === 1 && r.id === t.id);
+  let plays = prev ? prev.plays : 0; const a = el.querySelector("#a"), nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  if (prev) { preselect("nat", prev.nat); preselect("intel", prev.intel); }
+  el.querySelector("#back").onclick = () => { S.i1 = Math.max(0, S.i1 - 1); save(); render(); };
   const check = () => { nb.disabled = !(plays > 0 && picked("nat") && picked("intel")); hint.textContent = plays > 0 ? "" : "Play the clip in full before rating."; };
   a.onended = () => { plays++; check(); };
   el.querySelectorAll("input[type=radio]").forEach(r => r.onchange = check);
-  nb.onclick = () => { S.ratings.push({ part: 1, id: t.id, order: i, nat: picked("nat"), intel: picked("intel"), plays, ts: new Date().toISOString() }); S.i1++; save(); render(); };
+  check();
+  nb.onclick = () => { upsert({ part: 1, id: t.id, order: i, nat: picked("nat"), intel: picked("intel"), plays, ts: new Date().toISOString() }); S.i1++; save(); render(); };
   preload(S.p1[i + 1]);
   return el;
 }
@@ -160,14 +159,18 @@ function trial2() {
     <div class="q">Reference</div><audio controls id="r" src="${t.ref}"></audio>
     <div class="q">Test</div><audio controls id="a" src="${t.file}"></audio>
     <div class="q">Is the test clip the same person as the reference?</div>${scale("sim", SCALES.sim)}
-    <div class="row"><span class="mute" id="hint">Play both clips in full before rating.</span><button id="next" disabled>Next</button></div>
+    <div class="row"><span class="mute" id="hint">Play both clips in full before rating.</span><span><button id="back" class="ghost" ${i === 0 ? "disabled" : ""}>Back</button> <button id="next" disabled>Next</button></span></div>
     </div></div>`);
-  let pr = 0, pa = 0; const nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  const prev = S.ratings.find(r => r.part === 2 && r.id === t.id);
+  let pr = prev ? prev.plays_ref : 0, pa = prev ? prev.plays : 0; const nb = el.querySelector("#next"), hint = el.querySelector("#hint");
+  if (prev) preselect("sim", prev.sim);
+  el.querySelector("#back").onclick = () => { S.i2 = Math.max(0, S.i2 - 1); save(); render(); };
   const check = () => { nb.disabled = !(pr > 0 && pa > 0 && picked("sim")); hint.textContent = (pr > 0 && pa > 0) ? "" : "Play both clips in full before rating."; };
   el.querySelector("#r").onended = () => { pr++; check(); };
   el.querySelector("#a").onended = () => { pa++; check(); };
   el.querySelectorAll("input[type=radio]").forEach(r => r.onchange = check);
-  nb.onclick = () => { S.ratings.push({ part: 2, id: t.id, order: i, sim: picked("sim"), plays_ref: pr, plays: pa, ts: new Date().toISOString() }); S.i2++; save(); render(); };
+  check();
+  nb.onclick = () => { upsert({ part: 2, id: t.id, order: i, sim: picked("sim"), plays_ref: pr, plays: pa, ts: new Date().toISOString() }); S.i2++; save(); render(); };
   preload(S.p2[i + 1]);
   return el;
 }
