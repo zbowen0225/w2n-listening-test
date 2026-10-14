@@ -149,8 +149,9 @@ def main():
 
     # listener sanity: GT anchors and whisper anchor per listener
     out.append("## Listener sanity (mean rating of anchors)")
-    out.append("| listener | group | gt naturalness | whisper naturalness | gt similarity | wesper similarity | n ratings |")
     out.append("(sanity: gt should be high, whisper low, wesper similarity low — a listener far off these may be guessing)")
+    out.append("")
+    out.append("| listener | group | gt naturalness | whisper naturalness | gt similarity | wesper similarity | n ratings |")
     out.append("|---|---|---|---|---|---|---|")
     for who in listeners:
         def mean_of(sysn, m):
