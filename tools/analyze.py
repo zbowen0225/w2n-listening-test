@@ -85,8 +85,22 @@ def main():
             for m, _ in METRICS:
                 if r.get(m) is not None:
                     rows.append((who, d["group"], k["system"], k["spk"], k["uid"], m, r[m]))
+    # --flip ID[,ID]: mirror Part-1 scales (v -> 6-v) for listeners who evidently read the scale backwards
+    # --exclude ID[,ID]: drop listeners entirely
+    args = sys.argv[1:]
+    # --flip NZWUF:nat,ABCDE  -> "ID" flips nat+intel, "ID:nat" or "ID:intel" flips one column
+    flip = {}
+    if "--flip" in args:
+        for tok in args[args.index("--flip") + 1].split(","):
+            who, _, cols = tok.partition(":")
+            flip[who] = set(cols.split("+")) if cols else {"nat", "intel"}
+    excl = set(args[args.index("--exclude") + 1].split(",")) if "--exclude" in args else set()
+    for who in excl:
+        latest.pop(who, None)
+    rows = [(w, g, s_, spk, uid, m, (6 - v if (m in flip.get(w, ())) else v)) for (w, g, s_, spk, uid, m, v) in rows if w not in excl]
     listeners = sorted(latest)
-    out = [f"# Listening test summary", f"listeners: {len(listeners)} ({', '.join(listeners)}); ratings: {len(rows)}",
+    out = [f"# Listening test summary", f"listeners: {len(listeners)} ({', '.join(listeners)}); ratings: {len(rows)}"
+           + (f"; Part-1 scale flipped for {dict((k, sorted(v)) for k, v in flip.items())}" if flip else "") + (f"; excluded {sorted(excl)}" if excl else ""),
            "groups: " + ", ".join(f"{g}={sum(1 for d in latest.values() if d['group']==g)}" for g in CFG["groups"]), "",
            "Legend: all scores are 1–5, 5 = best. N-MOS = naturalness (Part 1, Q1), I-MOS = ease of understanding (Part 1, Q2),",
            "S-MOS = how similar the voice is to the reference speaker (Part 2). Cell = mean ± 95% CI over stimuli (n stimuli);",
@@ -159,7 +173,7 @@ def main():
             return f"{np.mean(xs):.2f}" if xs else "—"
         out.append(f"| {who} | {latest[who]['group']} | {mean_of('gt','nat')} | {mean_of('whisper','nat')} | {mean_of('gt','sim')} | {mean_of('wesper','sim')} | {sum(1 for r in rows if r[0]==who)} |")
     txt = "\n".join(out)
-    open(f"{HERE}/results/summary.md", "w").write(txt)
+    open(f"{HERE}/results/summary{'_flip' if flip else ''}{'_excl' if excl else ''}.md", "w").write(txt)
     print(txt)
 
 
