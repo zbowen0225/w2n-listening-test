@@ -39,16 +39,41 @@ def pull(url):
     print(f"pulled {len(data)} submissions into {HERE}/results/")
 
 
+def load_any(f):
+    """results/*.json (full page state) or results/*.txt (compact text pasted from a chat message)."""
+    if f.endswith(".json"):
+        return json.load(open(f))
+    txt = open(f, encoding="utf-8").read()
+    i = txt.find("LT1 ")
+    if i < 0:
+        return None
+    lines = [l.strip() for l in txt[i:].splitlines() if l.strip()]
+    hdr = dict(kv.split("=", 1) for kv in lines[0].split()[1:] if "=" in kv)
+    d = dict(listener=hdr.get("id", os.path.basename(f)), group=hdr.get("g"), started=hdr.get("start"),
+             finished=hdr.get("end"), done=True, ratings=[], source=f)
+    for l in lines[1:]:
+        p = l.split()
+        if len(p) < 3 or p[0] not in ("1", "2"):
+            continue
+        if p[0] == "1":
+            d["ratings"].append(dict(part=1, id=p[1], nat=int(p[2]), intel=int(p[3]) if len(p) > 3 else None, plays=int(p[4]) if len(p) > 4 else 0))
+        else:
+            d["ratings"].append(dict(part=2, id=p[1], sim=int(p[2]), plays=int(p[3]) if len(p) > 3 else 0, plays_ref=int(p[4]) if len(p) > 4 else 0))
+    return d
+
+
 def main():
     if len(sys.argv) > 2 and sys.argv[1] == "--pull":
         pull(sys.argv[2])
-    files = sorted(glob.glob(f"{HERE}/results/*.json"))
+    files = sorted(glob.glob(f"{HERE}/results/*.json") + glob.glob(f"{HERE}/results/*.txt"))
     if not files:
-        sys.exit("no results/*.json")
+        sys.exit("no results/*.json or *.txt")
     # keep the latest file per listener
     latest = {}
     for f in files:  # chronological by filename; a complete submission beats a later partial one
-        d = json.load(open(f))
+        d = load_any(f)
+        if d is None:
+            print(f"skip {f}: no 'LT1' header found"); continue
         prev = latest.get(d["listener"])
         if prev and prev.get("done", not prev.get("partial")) and d.get("partial"):
             continue
